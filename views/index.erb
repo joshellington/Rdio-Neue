@@ -1,0 +1,14 @@
+<div id="api"></div>
+
+<div id="current">
+  <img src="" id="cover" width="250">
+  <h2 id="song"></h2>
+  <h3 id="album"></h3>
+  <h4 id="artist"></h4>
+</div>
+
+<script>
+var playback_token = "<%= @playbackToken %>";
+var domain = "localhost";
+var new_releases = <%= @newReleases.to_json %>;
+</script>
