@@ -41,8 +41,12 @@ $(function() {
     playrand();
   });
 
-  key('up, down', function() {
-    playtrack();
+  key('up', function() {
+    api.rdio().previous();
+  });
+
+  key('down', function() {
+    api.rdio().next();
   });
 
   key('space', function() {
