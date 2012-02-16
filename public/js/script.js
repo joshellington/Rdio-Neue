@@ -57,6 +57,18 @@ $(function() {
     }
   });
 
+  key('a', function() {
+    var key = current.trackKeys.toString();
+    log(key);
+    $.post('/add/', {keys: key}, function(d) {
+      log(d);
+
+      if ( d.status == 'ok' ) {
+        msg('Album added to your collection!');
+      }
+    });
+  });
+
   $('.play').click(function() {
     var key = $(this).parent().find('.play_key').val();
     api.rdio().play(key);
@@ -86,5 +98,14 @@ $(function() {
   function playtrack() {
     var track = current.trackKeys[Math.floor(Math.random()*current.trackKeys.length)];
     play(track);
+  }
+
+  function msg(msg) {
+    $('#msg p').text(msg);
+    $('#msg').fadeIn(500, function() {
+      setTimeout(function() {
+        $('#msg').fadeOut(300);
+      }, 3000);
+    });
   }
 });

@@ -278,6 +278,23 @@ h4 {
     text-shadow:0 0 1px #000;
   }
 
+#msg {
+  display:none;
+  background:#fff;
+  text-align:center;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  text-shadow:0 0 1px #fff;
+  text-transform:uppercase;
+  color:#111;
+}
+
+  #msg p {
+    font-size:11px;
+    padding:10px;
+  }
 
 /* ==|== media queries ======================================================
    PLACEHOLDER Media Queries for Responsive Design.

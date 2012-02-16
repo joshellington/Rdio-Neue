@@ -19,7 +19,7 @@ get '/' do
                     [access_token, access_token_secret])
 
     @user = rdio.call('currentUser')['result']
-    @newReleases = rdio.call('getNewReleases', {'count' => 40})['result']
+    @newReleases = rdio.call('getNewReleases', {'count' => 50})['result']
     @playbackToken = rdio.call('getPlaybackToken', {'domain' => 'localhost'})['result']
 
     pp @user
@@ -30,6 +30,24 @@ get '/' do
     erb :index
   else
     erb :login
+  end
+end
+
+post '/add/?' do
+  access_token = session[:at]
+  access_token_secret = session[:ats]
+  if access_token and access_token_secret
+    rdio = Rdio.new([RDIO_CONSUMER_KEY, RDIO_CONSUMER_SECRET], 
+                    [access_token, access_token_secret])
+
+    res = rdio.call('addToCollection', {'keys' => params[:keys]})
+    pp '-------------'
+    pp params[:key]
+
+    content_type :json
+    res.to_json
+  else
+    "no session!"
   end
 end
 
