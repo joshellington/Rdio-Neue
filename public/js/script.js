@@ -7,7 +7,7 @@ $(function() {
   var api = $('#api');
 
   api.bind('ready.rdio', function() {
-    playfirst();
+    playrand();
     setup();
   });
 
