@@ -28,24 +28,18 @@ $(function() {
   });
 
   api.bind('updateFrequencyData.rdio', function(e, freq) {
-    log(freq);
+    // log(freq);
 
     var arr = freq.split(','),
         all = 0;
 
     for(var i=0; i<=arr.length; i++) {
       var n = parseInt(parseFloat(arr[i])*1500);
-      log(n);
+      // log(n);
 
       $('.cover').css({
         'box-shadow': '0 0 '+n+'px'+' #333'
       });
-
-      if ( i == arr.length - 1 ) {
-        // $('.cover').stop(true,false).animate({
-        //   'boxShadowBlur': n+'px'
-        // }, 300);
-      }
     }
 
   });
