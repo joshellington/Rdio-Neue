@@ -6,6 +6,9 @@ require './config/init'
 # Before any route is run
 before do
   @path = request.env['SCRIPT_NAME']
+  if session[:at]
+    @logout = true
+  end
 end
 
 #
@@ -19,7 +22,7 @@ get '/' do
                     [access_token, access_token_secret])
 
     @user = rdio.call('currentUser')['result']
-    @newReleases = rdio.call('getNewReleases', {'count' => 50})['result']
+    @newReleases = rdio.call('getNewReleases', {'count' => 200})['result']
     @playbackToken = rdio.call('getPlaybackToken', {'domain' => 'localhost'})['result']
 
     pp @user
@@ -41,9 +44,6 @@ post '/add/?' do
                     [access_token, access_token_secret])
 
     res = rdio.call('addToCollection', {'keys' => params[:keys]})
-    pp '-------------'
-    pp params[:key]
-
     content_type :json
     res.to_json
   else

@@ -24,15 +24,17 @@
 
   <div id="wrapper">
 
-    <h1>Neue</h1>
+    <!-- <h1>Neue</h1> -->
 
     <%= yield %>
 
   </div>
 
-  <div class="logout-link">
-    <a href="/logout" class="logout">Log out of Rdio</a>
-  </div>
+  <% if @logout == true %>
+    <div class="logout-link">
+      <a href="/logout" class="button">Log out of Rdio</a>
+    </div>
+  <% end %>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
   <script src="<%= @path %>/js/plugins.js"></script>

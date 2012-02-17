@@ -64,7 +64,7 @@ $(function() {
       log(d);
 
       if ( d.status == 'ok' ) {
-        msg('Album added to your collection!');
+        msg('Album added to your collection');
       }
     });
   });

@@ -43,8 +43,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * Also: hot pink! (or customize the background color to match your design)
  */
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #111; color: #fff; text-shadow: none; }
+::selection { background: #111; color: #fff; text-shadow: none; }
 
 
 /* =============================================================================
@@ -205,7 +205,7 @@ td { vertical-align: top; }
 
 body {
   font-family:'Ruda', Helvetica, Arial, sans-serif;
-  background:#111;
+  background:url('/img/bg-tile.jpg') repeat;
   color:#fff;
   text-shadow:0 0 1px #111;
   padding:30px;
@@ -221,14 +221,42 @@ h1 {
   text-align:center;
 }
 
+#api {
+  opacity:0;
+  visibility: hidden;
+  overflow:hidden;
+  width:0;
+  height:0;
+  z-index:0;
+}
+
+#wrapper {
+  height:450px;
+  width:250px;
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin-top:-225px;
+  margin-left:-125px;
+}
+
 #current {
   width:250px;
-  margin:0 auto;
   text-align:center;
+  z-index:1;
 }
 
 #cover {
-  border:10px solid #fff;
+  margin:13px;
+  box-shadow:0 0 10px #111;
+  /*border-top:1px solid #444;*/
+}
+
+.cover {
+  width:265px;
+  height:266px;
+  background:url('/img/cover-bg.png') no-repeat;
+  box-shadow:0 0 400px #333;
 }
 
 h2 {
@@ -255,8 +283,8 @@ h4 {
 
 .logout-link {
   position:fixed;
-  bottom:10px;
-  left:0;
+  bottom:0;
+  right:0;
   width:100%;
   text-align:center;
 }
@@ -280,20 +308,76 @@ h4 {
 
 #msg {
   display:none;
-  background:#fff;
+  background:#000;
   text-align:center;
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  text-shadow:0 0 1px #fff;
+  top:15px;
+  right:15px;
+  text-shadow:0 0 1px #111;
   text-transform:uppercase;
-  color:#111;
+  border:1px solid #000;
+  box-shadow:0 0 5px #333;
+  color:#fff;
 }
 
   #msg p {
-    font-size:11px;
-    padding:10px;
+    font-size:13px;
+    padding:10px 14px;
+    margin:1px;
+    border-top:1px solid #444;
+    background: rgb(38,38,38); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(38,38,38,1) 0%, rgba(24,24,24,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(38,38,38,1)), color-stop(100%,rgba(24,24,24,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#262626', endColorstr='#181818',GradientType=0 ); /* IE6-9 */
+  }
+
+.login-button {
+}
+
+a.button {
+  background: rgb(8,102,149); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(8,102,149,1) 0%, rgba(27,63,92,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(8,102,149,1)), color-stop(100%,rgba(27,63,92,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(8,102,149,1) 0%,rgba(27,63,92,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(8,102,149,1) 0%,rgba(27,63,92,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(8,102,149,1) 0%,rgba(27,63,92,1) 100%); /* IE10+ */
+  background: linear-gradient(top,  rgba(8,102,149,1) 0%,rgba(27,63,92,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#086695', endColorstr='#1b3f5c',GradientType=0 ); /* IE6-9 */
+
+  display:inline-block;
+  text-transform:uppercase;
+  text-decoration:none;
+  text-shadow:0 0 1px #1b3f5c;
+  font-size:13px;
+  color:#fff;
+  text-align:center;
+  padding:10px 14px;
+  border-top:1px solid #444;
+  box-shadow:0 0 5px #333;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  position:relative;
+}
+
+  a.button:hover {
+    box-shadow:0 0 20px #333;
+  }
+
+  a.button:active {
+    background: -moz-linear-gradient(top,  rgba(27,63,92,1) 0%, rgba(8,102,149,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(27,63,92,1)), color-stop(100%,rgba(8,102,149,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(27,63,92,1) 0%,rgba(8,102,149,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(27,63,92,1) 0%,rgba(8,102,149,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(27,63,92,1) 0%,rgba(8,102,149,1) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(27,63,92,1) 0%,rgba(8,102,149,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b3f5c', endColorstr='#086695',GradientType=0 ); /* IE6-9 */
   }
 
 /* ==|== media queries ======================================================
