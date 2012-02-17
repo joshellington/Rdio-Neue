@@ -9,6 +9,7 @@ before do
   if session[:at]
     @logout = true
   end
+  @domain = request.host
 end
 
 #
@@ -23,7 +24,7 @@ get '/' do
 
     @user = rdio.call('currentUser')['result']
     @newReleases = rdio.call('getNewReleases', {'count' => 200})['result']
-    @playbackToken = rdio.call('getPlaybackToken', {'domain' => 'localhost'})['result']
+    @playbackToken = rdio.call('getPlaybackToken', {'domain' => @domain})['result']
 
     pp @user
     pp @newReleases
