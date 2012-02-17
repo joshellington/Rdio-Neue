@@ -1,6 +1,7 @@
 var duration = 1,
     current,
-    t;
+    t,
+    playPosition;
 
 $(function() {
   var api = $('#api');
@@ -21,6 +22,7 @@ $(function() {
   });
 
   api.bind('positionChanged.rdio', function(e, position) {
+    playPosition = Math.round(position);
     $('#position').css('width', Math.floor(100*position/duration)+'%');
   });
 
@@ -55,6 +57,10 @@ $(function() {
     } else {
       api.rdio().pause();
     }
+  });
+
+  key('s', function() {
+    scrub();
   });
 
   key('a', function() {
@@ -98,6 +104,11 @@ $(function() {
   function playtrack() {
     var track = current.trackKeys[Math.floor(Math.random()*current.trackKeys.length)];
     play(track);
+  }
+
+  function scrub() {
+    log(playPosition);
+    api.rdio().seek(playPosition + 15);
   }
 
   function msg(msg) {
