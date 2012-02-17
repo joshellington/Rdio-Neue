@@ -58,3 +58,101 @@ slategray:"#708090",slategrey:"#708090",snow:"#fffafa",springgreen:"#00ff7f",ste
 a:"Invalid Color Name"}},name2hsv:function(a){a=this.name2hex(a);return/^[a-fA-F0-9#]{7}$/.test(a)?this.hex2hsv(a):{H:"Invalid Color Name",S:"Invalid Color Name",V:"Invalid Color Name",HSV:"Invalid Color Name",a:"Invalid Color Name"}},complement:function(a,b,c){if("string"==typeof a&&/(#([A-Fa-f0-9]){3}(([A-Fa-f0-9]){3})?)/.test(a))return a=a.replace("#",""),b="#",6===a.length&&(b+=this.rgb2hex(255-this.hex2rgb(a.substr(0,2))),b+=this.rgb2hex(255-this.hex2rgb(a.substr(2,2))),b+=this.rgb2hex(255-this.hex2rgb(a.substr(4,
 2)))),3===a.length&&(b+=this.rgb2hex(255-this.hex2rgb(a.substr(0,1)+a.substr(0,1))),b+=this.rgb2hex(255-this.hex2rgb(a.substr(1,1)+a.substr(1,1))),b+=this.rgb2hex(255-this.hex2rgb(a.substr(2,1)+a.substr(2,1)))),b;if(void 0!=a&&void 0!=b&&void 0!=c)return{R:255-a,G:255-b,B:255-c,RGB:255-a+" "+(255-b)+" "+(255-c),a:[255-a,255-b,255-c]};if("object"==typeof a)return{R:255-a[0],G:255-a[1],B:255-a[2],RGB:255-a[0]+" "+(255-a[1])+" "+(255-a[2]),a:[255-a[0],255-a[1],255-a[2]]}},rand:function(a){if("hex"==
 a||void 0==a){for(var a="",b=0;6>b;b++)var c=Math.floor(16*Math.random()),a=a+"0123456789abcdef".substring(c,c+1);return"#"+a}if("rgb"==a)return R=Math.floor(-254*Math.random()+255),G=Math.floor(-254*Math.random()+255),B=Math.floor(-254*Math.random()+255),{R:R,G:G,B:B,RGB:R+" "+G+" "+B,a:[R,G,B]}}};
+
+
+
+/*! Copyright (c) 2010 Burin Asavesna (http://helloburin.com)
+ * Licensed under the MIT License (LICENSE.txt).
+ */
+(function($) {
+    // boxShadow get hooks
+    var div = document.createElement('div'),
+        divStyle = div.style,
+        support = $.support,
+        rWhitespace = /\s/,
+        rParenWhitespace = /\)\s/;
+
+    support.boxShadow =
+        divStyle.MozBoxShadow     === ''? 'MozBoxShadow'    :
+        (divStyle.MsBoxShadow     === ''? 'MsBoxShadow'     :
+        (divStyle.WebkitBoxShadow === ''? 'WebkitBoxShadow' :
+        (divStyle.OBoxShadow      === ''? 'OBoxShadow'      :
+        (divStyle.boxShadow       === ''? 'BoxShadow'       :
+        false))));
+
+    div = null;
+
+    // helper function to inject a value into an existing string
+    // is there a better way to do this? it seems like a common pattern
+    function insert_into(string, value, index) {
+        var parts  = string.split(rWhitespace);
+        parts[index] = value;
+        return parts.join(" ");
+    }
+
+    if ( support.boxShadow && support.boxShadow !== "BoxShadow" ) {
+        $.cssHooks.boxShadow = {
+            get: function( elem, computed, extra ) {
+                return $.css(elem, support.boxShadow);
+            },
+            set: function( elem, value ) {
+                elem.style[ support.boxShadow ] = value;
+            }
+        };
+
+        $.cssHooks.boxShadowColor = {
+            get: function ( elem, computed, extra ) {
+                return $.css(elem, support.boxShadow).split(rParenWhitespace)[0] + ')';
+            },
+            set: function( elem, value ) {
+                elem.style[ support.boxShadow ] = value + " " + $.css(elem, support.boxShadow).split(rParenWhitespace)[1];
+            }
+        };
+
+        $.cssHooks.boxShadowBlur = {
+            get: function ( elem, computed, extra ) {
+                return $.css(elem, support.boxShadow).split(rWhitespace)[5];
+            },
+            set: function( elem, value ) {
+                elem.style[ support.boxShadow ] = insert_into($.css(elem, support.boxShadow), value, 5);
+            }
+        };
+
+        $.cssHooks.boxShadowSpread = {
+            get: function ( elem, computed, extra ) {
+                return $.css(elem, support.boxShadow).split(rWhitespace)[6];
+            },
+            set: function( elem, value ) {
+                elem.style[ support.boxShadow ] = insert_into($.css(elem, support.boxShadow), value, 6);
+            }
+        };
+
+        $.cssHooks.boxShadowX = {
+            get: function ( elem, computed, extra ) {
+                return $.css(elem, support.boxShadow).split(rWhitespace)[3];
+            },
+            set: function( elem, value ) {
+                elem.style[ support.boxShadow ] = insert_into($.css(elem, support.boxShadow), value, 3);
+            }
+        };
+
+        $.cssHooks.boxShadowY = {
+            get: function ( elem, computed, extra ) {
+                return $.css(elem, support.boxShadow).split(rWhitespace)[4];
+            },
+            set: function( elem, value ) {
+                elem.style[ support.boxShadow ] = insert_into($.css(elem, support.boxShadow), value, 4);
+            }
+        };
+
+        // setup fx hooks
+        var fxHooks = "Blur Spread X Y".split(" ");
+        $.each(fxHooks, function( i, suffix ) {
+            var hook = "boxShadow" + suffix;
+            $.fx.step[ hook ] = function( fx ) {
+                $.cssHooks[ hook ].set( fx.elem, fx.now + fx.unit );
+            };
+        });
+    }
+
+})(jQuery);

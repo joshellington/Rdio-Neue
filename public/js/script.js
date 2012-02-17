@@ -7,6 +7,11 @@ $(function() {
   var api = $('#api');
 
   api.bind('ready.rdio', function() {
+    api.rdio().startFrequencyAnalyzer({
+      frequencies: '31-band',
+      period: 100
+    });
+
     playrand();
     setup();
   });
@@ -22,6 +27,29 @@ $(function() {
     }
   });
 
+  api.bind('updateFrequencyData.rdio', function(e, freq) {
+    log(freq);
+
+    var arr = freq.split(','),
+        all = 0;
+
+    for(var i=0; i<=arr.length; i++) {
+      var n = parseInt(parseFloat(arr[i])*1500);
+      log(n);
+
+      $('.cover').css({
+        'box-shadow': '0 0 '+n+'px'+' #333'
+      });
+
+      if ( i == arr.length - 1 ) {
+        // $('.cover').stop(true,false).animate({
+        //   'boxShadowBlur': n+'px'
+        // }, 300);
+      }
+    }
+
+  });
+
   api.bind('positionChanged.rdio', function(e, position) {
     playPosition = Math.round(position);
     $('#position').css('width', Math.floor(100*position/duration)+'%');
@@ -30,10 +58,10 @@ $(function() {
   api.bind('playStateChanged.rdio', function(e, playState) {
     if (playState == 0) { // paused
       $('body').addClass('paused');
-      log(playState);
+      // log(playState);
     } else {
       $('body').removeClass('paused');
-      log(playState);
+      // log(playState);
     }
   });
   // this is a valid playback token for localhost.
@@ -121,7 +149,7 @@ $(function() {
 
   function playnext() {
     var ind = current['next'];
-    log(ind);
+    // log(ind);
     current = new_releases[ind];
     play(new_releases[ind].key);
   }
