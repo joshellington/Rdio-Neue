@@ -226,7 +226,8 @@ class Rdio
     # make a copy of the dict
     params = params.clone
     # put the method in the dict
-    params['method'] = method
+    params['method'] = method 
+      
     # call to the server and parse the response
     return JSON.load(signed_post('http://api.rdio.com/1/', params))
   end

@@ -7,7 +7,8 @@ $(function() {
   var api = $('#api');
 
   api.bind('ready.rdio', function() {
-    playrand();
+    playfirst();
+    setup();
   });
 
   api.bind('playingTrackChanged.rdio', function(e, playingTrack, sourcePosition) {
@@ -60,7 +61,11 @@ $(function() {
   });
 
   key('s', function() {
-    scrub();
+    scrub('forward');
+  });
+
+  key('b', function() {
+    scrub('backward');
   });
 
   key('a', function() {
@@ -95,10 +100,30 @@ $(function() {
     api.rdio().play(key);
   }
 
+  function setup() {
+    for(var i=0; i<=new_releases.length; i++) {
+      new_releases[i]['next'] = i + 1;
+      // log(new_releases[i]['next']);
+    }
+  }
+
   function playrand() {
     var obj = new_releases[Math.floor(Math.random()*new_releases.length)];
     current = obj;
     api.rdio().play(obj.key);
+  }
+
+  function playfirst() {
+    var obj = new_releases[0];
+    current = obj;
+    api.rdio().play(obj.key); 
+  }
+
+  function playnext() {
+    var ind = current['next'];
+    log(ind);
+    current = new_releases[ind];
+    play(new_releases[ind].key);
   }
 
   function playtrack() {
@@ -106,9 +131,13 @@ $(function() {
     play(track);
   }
 
-  function scrub() {
+  function scrub(direction) {
     log(playPosition);
-    api.rdio().seek(playPosition + 15);
+    if ( direction == 'forward' ) {
+      api.rdio().seek(playPosition + 15);
+    } else {
+      api.rdio().seek(playPosition - 15);
+    }
   }
 
   function msg(msg) {

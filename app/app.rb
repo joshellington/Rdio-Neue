@@ -23,11 +23,11 @@ get '/' do
                     [access_token, access_token_secret])
 
     @user = rdio.call('currentUser')['result']
-    @newReleases = rdio.call('getNewReleases', {'count' => 200})['result']
+    @newReleases = Cache.store(access_token+'getNewReleases', rdio.call('getNewReleases', {'count' => 200})['result'], 900)
     @playbackToken = rdio.call('getPlaybackToken', {'domain' => @domain})['result']
 
     pp @user
-    pp @newReleases
+    # pp @newReleases
     pp '-------------'
     pp @newReleases.length
 
@@ -35,6 +35,11 @@ get '/' do
   else
     erb :login
   end
+end
+
+get '/flush/?' do
+  REDIS.flushdb
+  "flushed"
 end
 
 post '/add/?' do
