@@ -53,7 +53,7 @@ a:hover {
 
 .background {
   opacity: 0.15;
-  background-position: center center;
+  background-position: center 20%;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -76,7 +76,7 @@ body.home .background {
 }
 
 #current {
-  width:500px;
+  width:600px;
   text-align:left;
   z-index:1;
   position: relative;
@@ -90,8 +90,8 @@ body.home .background {
 }
 
 .cover {
-  width:240px;
-  height:240px;
+  width:340px;
+  height:340px;
   float: left;
 }
 
@@ -101,6 +101,15 @@ body.home .background {
   width: 210px;
   padding: 25px;
   float: right;
+}
+
+.current-info a {
+  color: #fff;
+  border-color: transparent;
+}
+
+.current-info a:hover {
+  border-color: white;
 }
 
 header {
@@ -150,6 +159,11 @@ h5 {
   text-transform: uppercase;
   color: #888;
   font-weight: normal;
+}
+
+h5 span {
+  display: inline-block;
+  padding-left: 10px;
 }
 
 .links {

@@ -30,13 +30,13 @@ $(function() {
       if (playingTrack) {
         // log(playingTrack.duration);
         duration = playingTrack.duration;
-        if ($('#cover').attr('src') != playingTrack.icon) {
-          $('#cover').attr('src', playingTrack.icon);
+        if ($('#cover').attr('src') != playingTrack["icon400"]) {
+          $('#cover').attr('src', playingTrack["icon400"]);
         }
-        
-        $('#song').text(playingTrack.name);
-        $('#album').text(playingTrack.album);
-        $('#artist').text(playingTrack.artist);
+
+        $('#song').html(playingTrack.name);
+        $('#album').html('<a href="//rdio.com'+playingTrack.url+'">'+playingTrack.album+'</a>');
+        $('#artist').html('<a href="//rdio.com'+playingTrack.artistUrl+'">'+playingTrack.artist+'</a>');
 
         // $.getJSON('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=bd5217f8dfd32dd746cdc01a703aafd2&artist='+playingTrack.artist+'&album='+playingTrack.album+'&format=json', function(d) {
         //   console.log(d.album.image);
@@ -47,12 +47,13 @@ $(function() {
         //     $('#cover').attr('src', playingTrack.icon);
         //   }
         // });
-
-        $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+playingTrack.artist+'&api_key=bd5217f8dfd32dd746cdc01a703aafd2&format=json', function(d) {
-          // console.log(d.artist.image[4]["#text"]);
-          $('.background').css('background-image', 'url('+d.artist.image[4]["#text"]+')');
-        });
       }
+    });
+
+    api.bind('playingSourceChanged.rdio', function(e, playingSource) {
+      $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+playingSource.artist+'&api_key=bd5217f8dfd32dd746cdc01a703aafd2&format=json', function(d) {
+        $('.background').css('background-image', 'url('+d.artist.image[4]["#text"]+')');
+      });
     });
 
     api.bind('updateFrequencyData.rdio', function(e, freq) {
@@ -152,6 +153,7 @@ $(function() {
   }
 
   function setup() {
+    api.rdio().setRepeat(2);
     for(var i=0; i<=new_releases.length; i++) {
       new_releases[i]['next'] = i + 1;
       // log(new_releases[i]['next']);

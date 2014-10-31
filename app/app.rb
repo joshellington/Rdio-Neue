@@ -23,7 +23,7 @@ get '/' do
                     [access_token, access_token_secret])
 
     @user = rdio.call('currentUser')['result']
-    @newReleases = Cache.store(access_token+'getNewReleases', rdio.call('getNewReleases', {'count' => 200})['result'], 900)
+    @newReleases = Cache.store(access_token+'getNewReleases', rdio.call('getNewReleases', {'count' => 200, 'extras' => "icon400"})['result'], 900)
     @playbackToken = rdio.call('getPlaybackToken', {'domain' => @domain})['result']
 
     pp @user
