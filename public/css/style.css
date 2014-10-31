@@ -7,11 +7,12 @@
 
 
 body {
-  font-family:'Ruda', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   background: #111;
   color:#fff;
   padding:30px;
   -webkit-font-smoothing: antialiased;
+  font-weight: 100;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -19,9 +20,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 a {
-  color: #666;
+  color: #888;
   text-decoration: none;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #888;
 }
 
 a:hover {
@@ -111,15 +112,17 @@ header {
 }
 
 header p {
-  color: #666;
+  color: #888;
   margin: 0;
-  padding: 5px 0 0;
+  padding: 0;
   font-size: 13px;
 }
 
 h1 {
   font-size: 36px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 10px;
 }
 
 h2,h3 {
@@ -145,7 +148,8 @@ h4 {
 h5 {
   font-size: 11px;
   text-transform: uppercase;
-  color: #666;
+  color: #888;
+  font-weight: normal;
 }
 
 .links {
@@ -155,11 +159,11 @@ h5 {
   width: 100%;
   text-align: center;
   font-size: 11px;
-  color: #666;
+  color: #888;
 }
 
 .links a, .links span {
-  color: #666;
+  color: #888;
   text-decoration: none;
   display: inline-block;
   margin: 0 7px;

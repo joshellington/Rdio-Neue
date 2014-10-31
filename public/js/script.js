@@ -30,7 +30,10 @@ $(function() {
       if (playingTrack) {
         // log(playingTrack.duration);
         duration = playingTrack.duration;
-        $('#cover').attr('src', playingTrack.icon);
+        if ($('#cover').attr('src') != playingTrack.icon) {
+          $('#cover').attr('src', playingTrack.icon);
+        }
+        
         $('#song').text(playingTrack.name);
         $('#album').text(playingTrack.album);
         $('#artist').text(playingTrack.artist);
