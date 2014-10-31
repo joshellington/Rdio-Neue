@@ -230,16 +230,19 @@ h5 span {
 
 .login-button {
   text-align: center;
+  transform: translateZ(0);
 }
 
 .login-button a {
   font-size: 24px;
   color: white;
+  transform: translateZ(0);
 }
 
 .login-button p {
   color: #fff;
   font-size: 13px;
+  transform: translateZ(0);
 }
 
 a.button {
