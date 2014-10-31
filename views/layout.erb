@@ -20,21 +20,32 @@
 </head>
 <body>
 
-  <div id="msg"><p></p></div>
+  <div class="container">
+    <div id="msg"><p></p></div>
 
-  <div id="wrapper">
+    <div id="wrapper">
 
-    <!-- <h1>Neue</h1> -->
+      <!-- <h1>Neue</h1> -->
 
-    <%= yield %>
+      <%= yield %>
 
+    </div>
+
+    <div class="links">
+      <span>right/left: random album</span>
+      <span>space: pause</span>
+      <span>s: scrub forward</span>
+      <span>b: scrub backward</span>
+      <span>a: add album to favorites</span>
+      <span>/</span>
+      <a href="#" class="info">info</a>
+      <% if @logout == true %>
+        <a href="/logout">logout</a>
+      <% end %>
+    </div>
   </div>
 
-  <% if @logout == true %>
-    <div class="logout-link">
-      <a href="/logout" class="button">Log out of Rdio</a>
-    </div>
-  <% end %>
+  <div class="background"></div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
   <script src="<%= @path %>/js/plugins.js"></script>

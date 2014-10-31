@@ -1,4 +1,3 @@
-require 'newrelic_rpm'
 require 'open-uri'
 require 'json'
 require 'date'

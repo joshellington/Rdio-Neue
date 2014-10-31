@@ -18,29 +18,34 @@ $(function() {
 
   api.bind('playingTrackChanged.rdio', function(e, playingTrack, sourcePosition) {
     if (playingTrack) {
-      log(playingTrack.duration);
+      // log(playingTrack.duration);
       duration = playingTrack.duration;
       $('#cover').attr('src', playingTrack.icon);
       $('#song').text(playingTrack.name);
       $('#album').text(playingTrack.album);
       $('#artist').text(playingTrack.artist);
+
+      $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+playingTrack.artist+'&api_key=bd5217f8dfd32dd746cdc01a703aafd2&format=json', function(d) {
+        // console.log(d.artist.image[4]["#text"]);
+        $('.background').css('background-image', 'url('+d.artist.image[4]["#text"]+')');
+      });
     }
   });
 
   api.bind('updateFrequencyData.rdio', function(e, freq) {
     // log(freq);
 
-    var arr = freq.split(','),
-        all = 0;
+    // var arr = freq.split(','),
+    //     all = 0;
 
-    for(var i=0; i<=arr.length; i++) {
-      var n = parseInt(parseFloat(arr[i])*1500);
-      // log(n);
+    // for(var i=0; i<=arr.length; i++) {
+    //   var n = parseInt(parseFloat(arr[i])*1500);
+    //   // log(n);
 
-      $('.cover').css({
-        'box-shadow': '0 0 '+n+'px'+' #333'
-      });
-    }
+    //   $('.cover').css({
+    //     'box-shadow': '0 0 '+n+'px'+' #333'
+    //   });
+    // }
 
   });
 
@@ -97,7 +102,7 @@ $(function() {
       log(d);
 
       if ( d.status == 'ok' ) {
-        msg('Album added to your collection');
+        msg('Album added to your favorites.');
       }
     });
   });

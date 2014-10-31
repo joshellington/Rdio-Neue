@@ -1,7 +1,6 @@
-source :rubygems
+source "https://rubygems.org"
 
 gem 'sinatra'
-gem 'newrelic_rpm'
 gem 'rdio'
 gem 'json'
 gem 'redis'
