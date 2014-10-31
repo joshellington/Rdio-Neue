@@ -18,31 +18,35 @@
   <link href='http://fonts.googleapis.com/css?family=Ruda:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="<%= @path %>/css/style.css?v=3">
 </head>
-<body>
+<body <% if @logout == false %>class="home"<% end %>>
 
   <div class="container">
     <div id="msg"><p></p></div>
 
-    <div id="wrapper">
+    <header>
+      <h1>Neue</h1>
+      <p>Discover new releases on Rdio.</p>
+    </header>
 
-      <!-- <h1>Neue</h1> -->
+    <div id="wrapper">
 
       <%= yield %>
 
     </div>
 
-    <div class="links">
-      <span>right/left: random album</span>
-      <span>space: pause</span>
-      <span>s: scrub forward</span>
-      <span>b: scrub backward</span>
-      <span>a: add album to favorites</span>
-      <span>/</span>
-      <a href="#" class="info">info</a>
-      <% if @logout == true %>
+    <% if @logout == true %>
+      <div class="links">
+        <span>down: next song</span>
+        <span>right: random album</span>
+        <span>space: pause</span>
+        <span>s: scrub forward</span>
+        <span>b: scrub backward</span>
+        <span>a: add album to favorites</span>
+        <span>/</span>
+        <a href="#" class="info">info</a>
         <a href="/logout">logout</a>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 
   <div class="background"></div>

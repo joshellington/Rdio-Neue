@@ -33,6 +33,8 @@ get '/' do
 
     erb :index
   else
+    rdio = Rdio.new([RDIO_CONSUMER_KEY, RDIO_CONSUMER_SECRET])
+    @newReleases = rdio.call('getNewReleases', {'count' => 80})['result']
     erb :login
   end
 end

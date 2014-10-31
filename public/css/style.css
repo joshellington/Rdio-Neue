@@ -11,15 +11,22 @@ body {
   background: #111;
   color:#fff;
   padding:30px;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,h2,h3,h4,h5,h6 {
   margin:0;padding:0;
 }
 
-h1 {
-  font-size:85px;
-  text-align:center;
+a {
+  color: #666;
+  text-decoration: none;
+  border-bottom: 1px solid #666;
+}
+
+a:hover {
+  color: #fff;
+  border-bottom: 1px solid #fff;
 }
 
 #api {
@@ -56,6 +63,15 @@ h1 {
   right: 0;
   bottom: 0;
   z-index: 0;
+  overflow: hidden;
+}
+
+.background img {
+  width: 10%;
+}
+
+body.home .background {
+  opacity: 0.05;
 }
 
 #current {
@@ -64,7 +80,7 @@ h1 {
   z-index:1;
   position: relative;
   overflow: hidden;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.5);
   border-radius: 10px;
 }
 
@@ -84,6 +100,26 @@ h1 {
   width: 210px;
   padding: 25px;
   float: right;
+}
+
+header {
+  position: fixed;
+  top: 25px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+header p {
+  color: #666;
+  margin: 0;
+  padding: 5px 0 0;
+  font-size: 13px;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
 }
 
 h2,h3 {
@@ -158,33 +194,32 @@ h5 {
 
 #msg {
   display:none;
-  background:#000;
   text-align:center;
   position:fixed;
-  top:15px;
-  right:15px;
-  text-transform:uppercase;
-  border:1px solid #000;
-  box-shadow:0 0 5px #333;
+  top:25px;
+  right:25px;
   color:#fff;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.5);
 }
 
   #msg p {
-    font-size:13px;
-    padding:10px 14px;
-    margin:1px;
-    border-top:1px solid #444;
-    background: rgb(38,38,38); /* Old browsers */
-    background: -moz-linear-gradient(top,  rgba(38,38,38,1) 0%, rgba(24,24,24,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(38,38,38,1)), color-stop(100%,rgba(24,24,24,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* IE10+ */
-    background: linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(24,24,24,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#262626', endColorstr='#181818',GradientType=0 ); /* IE6-9 */
+    font-size:11px;
+    padding: 5px 7px;
   }
 
 .login-button {
+  text-align: center;
+}
+
+.login-button a {
+  font-size: 24px;
+  color: white;
+}
+
+.login-button p {
+  color: #fff;
+  font-size: 13px;
 }
 
 a.button {
