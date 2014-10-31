@@ -35,6 +35,16 @@ $(function() {
         $('#album').text(playingTrack.album);
         $('#artist').text(playingTrack.artist);
 
+        // $.getJSON('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=bd5217f8dfd32dd746cdc01a703aafd2&artist='+playingTrack.artist+'&album='+playingTrack.album+'&format=json', function(d) {
+        //   console.log(d.album.image);
+
+        //   if (d.album.image && d.album.image[4]["#text"] != "") {
+        //     $('#cover').attr('src', d.album.image[4]["#text"]);
+        //   } else {
+        //     $('#cover').attr('src', playingTrack.icon);
+        //   }
+        // });
+
         $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+playingTrack.artist+'&api_key=bd5217f8dfd32dd746cdc01a703aafd2&format=json', function(d) {
           // console.log(d.artist.image[4]["#text"]);
           $('.background').css('background-image', 'url('+d.artist.image[4]["#text"]+')');
